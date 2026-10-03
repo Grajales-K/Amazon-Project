@@ -46,13 +46,15 @@ products.forEach((product) => {
             Added
           </div>
 
-          <button class="add-to-cart-button button-primary js-add-cart">
+          <button class="add-to-cart-button button-primary js-add-cart" data-product-name="${product.name}">
             Add to Cart
           </button>
         </div>`;
 });
 
 document.querySelector('.js-products-grid').innerHTML = productHTML;
+
+// how to add elements to the cart? to understand how to add the exact product to the cart, we need a  HTML "data attribute" which allow us to attach any information to an element.
 
 document.querySelectorAll('.js-add-cart')
     .forEach((button) => {
