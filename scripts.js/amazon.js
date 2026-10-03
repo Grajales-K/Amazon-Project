@@ -54,11 +54,13 @@ products.forEach((product) => {
 
 document.querySelector('.js-products-grid').innerHTML = productHTML;
 
-// how to add elements to the cart? to understand how to add the exact product to the cart, we need a  HTML "data attribute" which allow us to attach any information to an element.
+// how to add elements to the cart? to understand how to add the exact product to the cart, we need a  HTML "data attribute" eg. (data-nameElement...),  which allow us to attach any information to an element.
+
+//dataset: will return an object containing all the data attributes of the element. For example, if we have a button with a data attribute like data-product-name="${product.name}, with dataset we have access to the element stored in.
 
 document.querySelectorAll('.js-add-cart')
     .forEach((button) => {
     button.addEventListener('click', () => {
-    console.log('added product');
+    console.log(button.dataset.productName);
   });
 });
