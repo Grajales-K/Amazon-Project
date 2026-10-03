@@ -46,7 +46,9 @@ products.forEach((product) => {
             Added
           </div>
 
-          <button class="add-to-cart-button button-primary js-add-cart" data-product-name="${product.name}">
+          <button class="add-to-cart-button button-primary js-add-cart" data-product-name="${
+            product.name
+          }">
             Add to Cart
           </button>
         </div>`;
@@ -58,14 +60,28 @@ document.querySelector('.js-products-grid').innerHTML = productHTML;
 
 //dataset: will return an object containing all the data attributes of the element. For example, if we have a button with a data attribute like data-product-name="${product.name}, with dataset we have access to the element stored in.
 
-document.querySelectorAll('.js-add-cart')
-    .forEach((button) => {
-    button.addEventListener('click', () => {
+document.querySelectorAll('.js-add-cart').forEach((button) => {
+  button.addEventListener('click', () => {
     const productName = button.dataset.productName;
-    cart.push({
+
+    let matchingItem;
+
+    cart.forEach((item) => {
+      if (productName === item.productName) {
+        matchingItem = item;
+      }
+    });
+
+    if (matchingItem) {
+      matchingItem.quantity++;
+    } else {
+        
+      cart.push({
         productName: productName,
         quantity: 1
-    })
+      });
+    }
+
     console.log(cart);
   });
 });
