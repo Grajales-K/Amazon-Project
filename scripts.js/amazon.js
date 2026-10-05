@@ -59,15 +59,18 @@ document.querySelector('.js-products-grid').innerHTML = productHTML;
 
 //dataset: will return an object containing all the data attributes of the element. For example, if we have a button with a data attribute like data-product-name="${product.name}, with dataset we have access to the element stored in.
 
+
+// exercise implemented from 13a to 13f. adding the class to the selector, save it in a variable selector, then updated the conditions to check if the product is already in the cart, if it is, we update the quantity, if not we add a new item to the cart. Finally, we update the cart quantity in the header.
+
 document.querySelectorAll('.js-add-cart').forEach((button) => {
   button.addEventListener('click', () => {
     const productId = button.dataset.productId;
     const selector = document.querySelector(
       `.js-quantity-selector-${productId}`
     ).value;
+    const valueSelection = Number(selector);
 
     console.log(`Product ID: ${productId}, Quantity: ${selector}`);
-    const valueSelection = Number(selector);
 
     let matchingItem;
 
