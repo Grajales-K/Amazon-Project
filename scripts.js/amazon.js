@@ -64,7 +64,10 @@ document.querySelector('.js-products-grid').innerHTML = productHTML;
 
 document.querySelectorAll('.js-add-cart').forEach((button) => {
   button.addEventListener('click', () => {
-    const productId = button.dataset.productId;
+
+    // 13h. use destructuring to update this code.
+    // const productId = button.dataset.productId;
+    const { productId } = button.dataset;
     const selector = document.querySelector(
       `.js-quantity-selector-${productId}`
     ).value;
@@ -83,13 +86,16 @@ document.querySelectorAll('.js-add-cart').forEach((button) => {
     if (matchingItem) {
       matchingItem.quantity += valueSelection;
     } else {
+      // 13h. use the shorhand  property to update this code.
       cart.push({
-        productId: productId,
+        // productId: productId,
+        productId, //when the property name and the variable name are the same, we can use the shorthand property to update this code.
         quantity: valueSelection
       });
     }
 
     let cartQuantity = 0;
+
     cart.forEach((item) => {
       cartQuantity += item.quantity;
     });
