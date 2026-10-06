@@ -40,8 +40,8 @@ products.forEach((product) => {
           </div>
 
           <div class="product-spacer"></div>
-
-          <div class="added-to-cart">
+          
+          <div class="added-to-cart js-display-add-message-${product.id}">
             <img src="images/icons/checkmark.png">
             Added
           </div>
@@ -57,14 +57,12 @@ document.querySelector('.js-products-grid').innerHTML = productHTML;
 
 // how to add elements to the cart? to understand how to add the exact product to the cart, we need a  HTML "data attribute" eg. (data-nameElement...),  which allow us to attach any information to an element.
 
-//dataset: will return an object containing all the data attributes of the element. For example, if we have a button with a data attribute like data-product-name="${product.name}, with dataset we have access to the element stored in.
-
+//dataset: will return an object containing all the data attributes of the element. For example, if we have a button with a data attribute like data-product-name="${product.id}, with dataset we have access to the element stored in.
 
 // exercise implemented from 13a to 13f. adding the class to the selector, save it in a variable selector, then updated the conditions to check if the product is already in the cart, if it is, we update the quantity, if not we add a new item to the cart. Finally, we update the cart quantity in the header.
 
 document.querySelectorAll('.js-add-cart').forEach((button) => {
   button.addEventListener('click', () => {
-
     // 13h. use destructuring to update this code.
     // const productId = button.dataset.productId;
     const { productId } = button.dataset;
@@ -73,7 +71,11 @@ document.querySelectorAll('.js-add-cart').forEach((button) => {
     ).value;
     const valueSelection = Number(selector);
 
-    console.log(`Product ID: ${productId}, Quantity: ${selector}`);
+    // 13i. add a unique clase to this element identified which product is for
+    const displayMessageAdded = document.querySelector(
+      `.js-display-add-message-${productId}`
+    );
+    displayMessageAdded.classList.add('added-to-cart-visible');
 
     let matchingItem;
 
@@ -94,8 +96,8 @@ document.querySelectorAll('.js-add-cart').forEach((button) => {
       });
     }
 
+    // Update cart quantity in the header
     let cartQuantity = 0;
-
     cart.forEach((item) => {
       cartQuantity += item.quantity;
     });
@@ -106,4 +108,3 @@ document.querySelectorAll('.js-add-cart').forEach((button) => {
     document.querySelector('.js-cart-quantity').innerHTML = cartQuantity;
   });
 });
-
