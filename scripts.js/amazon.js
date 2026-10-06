@@ -61,6 +61,7 @@ document.querySelector('.js-products-grid').innerHTML = productHTML;
 
 // exercise implemented from 13a to 13f. adding the class to the selector, save it in a variable selector, then updated the conditions to check if the product is already in the cart, if it is, we update the quantity, if not we add a new item to the cart. Finally, we update the cart quantity in the header.
 
+let addedMessageTimeoutId;
 document.querySelectorAll('.js-add-cart').forEach((button) => {
   button.addEventListener('click', () => {
     // 13h. use destructuring to update this code.
@@ -71,11 +72,22 @@ document.querySelectorAll('.js-add-cart').forEach((button) => {
     ).value;
     const valueSelection = Number(selector);
 
-    // 13i. add a unique clase to this element identified which product is for
+    // 13i-k. add a unique clase to this element identified which product is for
     const displayMessageAdded = document.querySelector(
       `.js-display-add-message-${productId}`
     );
+
+    // 13l. after 2 seconds use setTimeout to make the message disappear by removing the class.
+
     displayMessageAdded.classList.add('added-to-cart-visible');
+
+    // 13m. if we click 'add to cart' wait 1 to 1.5 seconds and click again, the message disappear quickly, (since the previus setTimeout is still running and will make the message desappear soon).
+
+    clearTimeout(addedMessageTimeoutId);
+    // Modify the code so when we click, it refreshes the 2 seconds wait time. you can use clearTimeout() to cancel the previus one.
+    addedMessageTimeoutId = setTimeout(() => {
+      displayMessageAdded.classList.remove('added-to-cart-visible');
+    }, 2000);
 
     let matchingItem;
 
