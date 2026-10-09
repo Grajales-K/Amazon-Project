@@ -1,4 +1,5 @@
 import { cart } from '../data/cart.js';
+import { products } from '../data/products.js';
 
 let productHTML = '';
 
@@ -61,8 +62,6 @@ document.querySelector('.js-products-grid').innerHTML = productHTML;
 
 //dataset: will return an object containing all the data attributes of the element. For example, if we have a button with a data attribute like data-product-name="${product.id}, with dataset we have access to the element stored in.
 
-// exercise implemented from 13a to 13f. adding the class to the selector, save it in a variable selector, then updated the conditions to check if the product is already in the cart, if it is, we update the quantity, if not we add a new item to the cart. Finally, we update the cart quantity in the header.
-
 let addedMessageTimeout = {};
 
 
@@ -76,19 +75,14 @@ document.querySelectorAll('.js-add-cart').forEach((button) => {
     ).value;
     const valueSelection = Number(selector);
 
-    // 13i-k. add a unique clase to this element identified which product is for
     const displayMessageAdded = document.querySelector(
       `.js-display-add-message-${productId}`
     );
 
-    // 13l. after 2 seconds use setTimeout to make the message disappear by removing the class.
-
     displayMessageAdded.classList.add('added-to-cart-visible');
 
-    // 13m. if we click 'add to cart' wait 1 to 1.5 seconds and click again, the message disappear quickly, (since the previus setTimeout is still running and will make the message desappear soon).
-
     clearTimeout(addedMessageTimeout[productId]);
-    // Modify the code so when we click, it refreshes the 2 seconds wait time. you can use clearTimeout() to cancel the previus one.
+
     addedMessageTimeout[productId] = setTimeout(() => {
       displayMessageAdded.classList.remove('added-to-cart-visible');
     }, 2000);
@@ -104,10 +98,9 @@ document.querySelectorAll('.js-add-cart').forEach((button) => {
     if (matchingItem) {
       matchingItem.quantity += valueSelection;
     } else {
-      // 13h. use the shorhand  property to update this code.
+
       cart.push({
-        // productId: productId,
-        productId, //when the property name and the variable name are the same, we can use the shorthand property to update this code.
+        productId, 
         quantity: valueSelection
       });
     }
