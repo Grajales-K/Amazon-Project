@@ -1,4 +1,4 @@
-export const cart = [{
+export let cart = [{
     productId: 'e43638ce-6aa0-4b85-b27f-e1d07eb678c6',
     quantity: 2,
 },
@@ -10,9 +10,9 @@ export const cart = [{
 export function addToCart(productId, valueSelection) {
   let matchingItem;
 
-  cart.forEach((item) => {
+  cart.forEach((cartItem) => {
     if (productId === item.productId) {
-      matchingItem = item;
+      matchingItem = cartItem;
     }
   });
 
@@ -24,4 +24,19 @@ export function addToCart(productId, valueSelection) {
       quantity: valueSelection
     });
   }
+}
+
+
+// to know how to deleted one of the product, we can create a new array, loop through each item, add the product except the one we want to delete, and then assign the new array to the cart.
+export function removeFromCart(productId){
+  const newCart = [];
+
+  cart.forEach((cartItem) => {
+    if (cartItem.productId !== productId){
+      newCart.push(cartItem);
+    }
+  });
+
+  cart = newCart;
+
 }
