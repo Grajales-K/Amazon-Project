@@ -1,4 +1,4 @@
-import { cart } from '../data/cart.js';
+import { cart, addToCart } from '../data/cart.js';
 import { products } from '../data/products.js';
 
 let productHTML = '';
@@ -62,8 +62,21 @@ document.querySelector('.js-products-grid').innerHTML = productHTML;
 
 //dataset: will return an object containing all the data attributes of the element. For example, if we have a button with a data attribute like data-product-name="${product.id}, with dataset we have access to the element stored in.
 
-let addedMessageTimeout = {};
 
+
+// Update cart quantity in the header
+function UpdateCartQuantity() {
+  let cartQuantity = 0;
+  cart.forEach((item) => {
+    cartQuantity += item.quantity;
+  });
+
+  console.log(cartQuantity);
+  //update the cart quantity in the header
+  document.querySelector('.js-cart-quantity').innerHTML = cartQuantity;
+}
+
+let addedMessageTimeout = {};
 
 document.querySelectorAll('.js-add-cart').forEach((button) => {
   button.addEventListener('click', () => {
@@ -79,6 +92,9 @@ document.querySelectorAll('.js-add-cart').forEach((button) => {
       `.js-display-add-message-${productId}`
     );
 
+    addToCart(productId, valueSelection);
+    UpdateCartQuantity();
+
     displayMessageAdded.classList.add('added-to-cart-visible');
 
     clearTimeout(addedMessageTimeout[productId]);
@@ -86,34 +102,5 @@ document.querySelectorAll('.js-add-cart').forEach((button) => {
     addedMessageTimeout[productId] = setTimeout(() => {
       displayMessageAdded.classList.remove('added-to-cart-visible');
     }, 2000);
-
-    let matchingItem;
-
-    cart.forEach((item) => {
-      if (productId === item.productId) {
-        matchingItem = item;
-      }
-    });
-
-    if (matchingItem) {
-      matchingItem.quantity += valueSelection;
-    } else {
-
-      cart.push({
-        productId, 
-        quantity: valueSelection
-      });
-    }
-
-    // Update cart quantity in the header
-    let cartQuantity = 0;
-    cart.forEach((item) => {
-      cartQuantity += item.quantity;
-    });
-
-    console.log(cartQuantity);
-
-    //update the cart quantity in the header
-    document.querySelector('.js-cart-quantity').innerHTML = cartQuantity;
   });
 });
