@@ -7,11 +7,16 @@ export let cart = [{
     quantity: 1,
 }];
 
+  function saveToStorage(){
+    localStorage.setItem('cart', JSON.stringify(cart));
+
+  }
+
 export function addToCart(productId, valueSelection) {
   let matchingItem;
 
   cart.forEach((cartItem) => {
-    if (productId === item.productId) {
+    if (productId === cartItem.productId) {
       matchingItem = cartItem;
     }
   });
@@ -24,6 +29,9 @@ export function addToCart(productId, valueSelection) {
       quantity: valueSelection
     });
   }
+
+  saveToStorage();
+
 }
 
 
@@ -38,5 +46,7 @@ export function removeFromCart(productId){
   });
 
   cart = newCart;
+
+  saveToStorage();
 
 }
