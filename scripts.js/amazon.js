@@ -50,9 +50,8 @@ products.forEach((product) => {
             Added
           </div>
 
-          <button class="add-to-cart-button button-primary js-add-cart" data-product-id="${
-            product.id
-          }"
+          <button class="add-to-cart-button button-primary js-add-cart" data-product-id="${product.id
+    }"
             > Add to Cart </button>
         </div>`;
 });
@@ -63,7 +62,7 @@ document.querySelector('.js-products-grid').innerHTML = productHTML;
 
 //dataset: will return an object containing all the data attributes of the element. For example, if we have a button with a data attribute like data-product-name="${product.id}, with dataset we have access to the element stored in.
 
-
+UpdateCartQuantity(); //update the cart quantity in the header when the page loads
 
 // Update cart quantity in the header
 function UpdateCartQuantity() {
@@ -74,8 +73,13 @@ function UpdateCartQuantity() {
 
   console.log(cartQuantity);
   //update the cart quantity in the header
-  document.querySelector('.js-cart-quantity').innerHTML = cartQuantity;
+  const cartHeader = document.querySelector('.js-cart-quantity')
+
+  cartHeader.innerHTML = cartQuantity;
+  console.log("aqui el header ", cartHeader);
 }
+
+
 
 let addedMessageTimeout = {};
 
