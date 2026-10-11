@@ -1,9 +1,10 @@
-import { cart, removeFromCart } from '../data/cart.js';
+import { cart, removeFromCart, calculateQuantityCarts } from '../data/cart.js';
 import { products } from '../data/products.js';
 import { formatCurrency } from './utils/money.js';
 
 
 let cartSummaryHTML = '';
+
 
 cart.forEach((cartItem) => {
   const productId = cartItem.productId;
@@ -104,14 +105,28 @@ document.querySelectorAll('.js-delete-link')
       // console.log("this is the carrito", cart);
 
       const container = document.querySelector(`.js-cart-item-container-${productId}`);
-
-      console.log("this is the container", container);
-
       container.remove();
-    
+
+      updateCart();//to update the cart quantity in the header when an item is removed and sent to the cart header.
+
     })
 
   })
+
+updateCart(); //update the cart quantity in the header when the page loads
+
+function updateCart() {
+  const cartQuantity = calculateQuantityCarts();
+
+  const cartHeaderCheckout = document.querySelector('.js-cart-checkout')
+
+
+  // Ternary operator: condition ? valueIfTrue : valueIfFalse
+  // If cartQuantity is exactly 1, use the singular 'item'; otherwise use the plural 'items'.
+  // Each ${...} is evaluated separately: the first inserts the number, the second inserts the word.
+  cartHeaderCheckout.innerHTML = `${cartQuantity} ${cartQuantity === 1 ? 'item' : 'items'}`;
+}
+
 
 
 
