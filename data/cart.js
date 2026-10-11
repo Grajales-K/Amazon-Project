@@ -41,6 +41,17 @@ export function addToCart(productId, valueSelection) {
 
 }
 
+// Update cart quantity cart elements
+export function calculateQuantityCarts() {
+  let cartQuantity = 0;
+  cart.forEach((item) => {
+    cartQuantity += item.quantity;
+  });
+  console.log(cartQuantity);
+  return cartQuantity;
+}
+
+
 
 // to know how to deleted one of the product, we can create a new array, loop through each item, add the product except the one we want to delete, and then assign the new array to the cart.
 export function removeFromCart(productId){
