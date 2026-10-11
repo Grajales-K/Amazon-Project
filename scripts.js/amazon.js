@@ -1,4 +1,4 @@
-import { cart, addToCart } from '../data/cart.js';
+import { cart, addToCart, calculateQuantityCarts } from '../data/cart.js';
 import { products } from '../data/products.js';
 import { formatCurrency } from './utils/money.js';
 
@@ -64,19 +64,13 @@ document.querySelector('.js-products-grid').innerHTML = productHTML;
 
 updateCartQuantity(); //update the cart quantity in the header when the page loads
 
-// Update cart quantity in the header
-function updateCartQuantity() {
-  let cartQuantity = 0;
-  cart.forEach((item) => {
-    cartQuantity += item.quantity;
-  });
+function updateCartQuantity(){
+  const cartQuantity = calculateQuantityCarts();
 
-  console.log(cartQuantity);
   //update the cart quantity in the header
   const cartHeader = document.querySelector('.js-cart-quantity')
   cartHeader.innerHTML = cartQuantity;
 }
-
 
 // addedMessageTimeout is an object that will store the timeout for each product. This way, we can clear the timeout for a specific product when the user adds it to the cart again before the message disappears.
 let addedMessageTimeout = {};
