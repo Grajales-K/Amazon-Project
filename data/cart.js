@@ -41,7 +41,7 @@ export function addToCart(productId, valueSelection) {
 
 }
 
-// Update cart quantity cart elements
+// Update cart quantity cart elements 
 export function calculateQuantityCarts() {
   let cartQuantity = 0;
   cart.forEach((item) => {
