@@ -39,7 +39,7 @@ cart.forEach((cartItem) => {
           <span>
             Quantity: <span class="quantity-label">${cartItem.quantity}</span>
           </span>
-          <span class="update-quantity-link link-primary">
+          <span class="update-quantity-link link-primary" data-product-id="${matchingProduct.id}">
             Update
           </span>
           <span class="delete-quantity-link link-primary js-delete-link" data-product-id="${matchingProduct.id}">
@@ -126,6 +126,20 @@ function updateCart() {
   // Each ${...} is evaluated separately: the first inserts the number, the second inserts the word.
   cartHeaderCheckout.innerHTML = `${cartQuantity} ${cartQuantity === 1 ? 'item' : 'items'}`;
 }
+
+
+// let's do interactive step by step th 'update button'
+// 14f.in checkout.js get all the update links from the page and add a "click " event listener to each link.also, attach the productId to each link, when clicking, get the product ID AND  console.log.
+
+//update event listener for the update quantity link
+document.querySelectorAll('.update-quantity-link')
+  .forEach((link) =>{
+    link.addEventListener( "click", () => {
+      const productId = link.dataset.productId;
+      console.log("this is the product-Id", productId);
+    })
+  })
+
 
 
 
