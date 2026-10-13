@@ -115,15 +115,32 @@
   margin-bottom: 5px;
 }
 
-.product-quantity .link-primary {
-  margin-left: 3px;
-}
 
 /* update input cart quantity */
 .quantity-input{
   font-size: 16px;
-  width: 30px
+  width: 30px;
+  display: none;
 }
+
+/* save quantity updateLink */
+.save-quantity-link {
+  display: none;
+}
+
+.product-quantity .link-primary {
+  margin-left: 3px;
+}
+
+
+.is-editing-quantity .quantity-input {
+  display: initial;
+}
+
+.is-editing-quantity .save-quantity-link {
+  display: initial;
+}
+
 
 
 @media (max-width: 1000px) {
