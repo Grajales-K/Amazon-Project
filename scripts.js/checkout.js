@@ -132,7 +132,7 @@ function updateCart() {
 // let's do interactive step by step th 'update button'
 // 14f.in checkout.js get all the update links from the page and add a "click " event listener to each link.also, attach the productId to each link, when clicking, get the product ID AND  console.log.
 
-update event listener for the update quantity link
+// update event listener for the update quantity link
 document.querySelectorAll('.update-quantity-link')
   .forEach((link) =>{
     link.addEventListener( "click", () => {
@@ -140,4 +140,31 @@ document.querySelectorAll('.update-quantity-link')
       console.log("this is the product-Id", productId);
     })
   })
+
+
+  /*  
+  14g. add 2 HTML element after the "update" link
+  * An <input class="quantity-input".(for entering a new quantity)
+  * A <span class="save-quantity-link">save</span> (for saving the new quantity)
+  * Style the <input> and set its width to 30px (put the style in the file: css)
+  * Add a class "link-primary" to the <span> (for styling the link)*/
+
+  document.querySelectorAll('.update-quantity-link')
+    .forEach((link) =>{
+      link.addEventListener( "click", () => {
+        const productId = link.dataset.productId;
+        console.log("this is the product-Id", productId);
+        const input = document.createElement('input');
+        input.classList.add('quantity-input');
+        input.setAttribute('type', 'number');
+
+        console.log(input);
+
+        const saveSpan = document.createElement('span')
+        saveSpan.classList.add('save-quantity-link', 'link-primary');
+        saveSpan.textContent = 'save';
+
+      })
+    })
+
 
