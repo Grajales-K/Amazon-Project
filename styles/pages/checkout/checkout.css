@@ -119,6 +119,13 @@
   margin-left: 3px;
 }
 
+/* update input cart quantity */
+.quantity-input{
+  font-size: 16px;
+  width: 30px
+}
+
+
 @media (max-width: 1000px) {
   .delivery-options {
     /* grid-column: 1 means this element will be placed
