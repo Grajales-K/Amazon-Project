@@ -42,6 +42,8 @@ cart.forEach((cartItem) => {
           <span class="update-quantity-link link-primary" data-product-id="${matchingProduct.id}">
             Update
           </span>
+          <input class="quantity-input" type="number">
+          <span class="save-quantity-link link-primary">Save</span>
           <span class="delete-quantity-link link-primary js-delete-link" data-product-id="${matchingProduct.id}">
             Delete
           </span>
@@ -133,38 +135,62 @@ function updateCart() {
 // 14f.in checkout.js get all the update links from the page and add a "click " event listener to each link.also, attach the productId to each link, when clicking, get the product ID AND  console.log.
 
 // update event listener for the update quantity link
+// document.querySelectorAll('.update-quantity-link')
+//   .forEach((link) => {
+//     link.addEventListener("click", () => {
+//       const productId = link.dataset.productId;
+//       console.log("this is the product-Id", productId);
+//     })
+//   })
+
+
+/*  
+14g. add 2 HTML element after the "update" link
+* An <input class="quantity-input".(for entering a new quantity)
+* A <span class="save-quantity-link">save</span> (for saving the new quantity)
+* Style the <input> and set its width to 30px (put the style in the file: css)
+* Add a class "link-primary" to the <span> (for styling the link)*/
+
+// document.querySelectorAll('.update-quantity-link')
+//   .forEach((link) => {
+//     link.addEventListener("click", () => {
+//       const productId = link.dataset.productId;
+//       console.log("this is the product-Id", productId);
+//       const input = document.createElement('input');
+//       input.classList.add('quantity-input');
+//       input.setAttribute('type', 'number');
+
+//       console.log(input);
+
+//       const saveSpan = document.createElement('span')
+//       saveSpan.classList.add('save-quantity-link', 'link-primary');
+//       saveSpan.textContent = 'save';
+
+//     })
+//   })
+
+/*
+14h. Make "save" appear when clicking "update".
+* when clicking "update", get the cart-item-container for the product, and add the class "is-editing-quantity" to the      container use.classlist.
+* in the checkout.css,  style the <input> & "save" link and ass display: none; (they will be invisible at the start)
+* The css "is-editing-quantity" .quantity-input [...] styles skenebts with class "quantity-input" inside the element with class "is-editing-quantity"
+* use this, and "dipslay: initial"; (rsert the display property) to make the <input> apper when editing the quantity. same for the "Save" link */
+
+
 document.querySelectorAll('.update-quantity-link')
-  .forEach((link) =>{
-    link.addEventListener( "click", () => {
+  .forEach((link) => {
+    link.addEventListener("click", () => {
       const productId = link.dataset.productId;
       console.log("this is the product-Id", productId);
+
+      const container = document.querySelector(
+        `.js-cart-item-container-${productId}`
+      );
+
+      container.classList.add('is-editing-quantity');
+
+      
     })
+
+
   })
-
-
-  /*  
-  14g. add 2 HTML element after the "update" link
-  * An <input class="quantity-input".(for entering a new quantity)
-  * A <span class="save-quantity-link">save</span> (for saving the new quantity)
-  * Style the <input> and set its width to 30px (put the style in the file: css)
-  * Add a class "link-primary" to the <span> (for styling the link)*/
-
-  document.querySelectorAll('.update-quantity-link')
-    .forEach((link) =>{
-      link.addEventListener( "click", () => {
-        const productId = link.dataset.productId;
-        console.log("this is the product-Id", productId);
-        const input = document.createElement('input');
-        input.classList.add('quantity-input');
-        input.setAttribute('type', 'number');
-
-        console.log(input);
-
-        const saveSpan = document.createElement('span')
-        saveSpan.classList.add('save-quantity-link', 'link-primary');
-        saveSpan.textContent = 'save';
-
-      })
-    })
-
-
