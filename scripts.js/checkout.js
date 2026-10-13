@@ -115,6 +115,7 @@ document.querySelectorAll('.js-delete-link')
 
 updateCart(); //update the cart quantity in the header when the page loads
 
+
 function updateCart() {
   const cartQuantity = calculateQuantityCarts();
 
@@ -131,7 +132,7 @@ function updateCart() {
 // let's do interactive step by step th 'update button'
 // 14f.in checkout.js get all the update links from the page and add a "click " event listener to each link.also, attach the productId to each link, when clicking, get the product ID AND  console.log.
 
-//update event listener for the update quantity link
+update event listener for the update quantity link
 document.querySelectorAll('.update-quantity-link')
   .forEach((link) =>{
     link.addEventListener( "click", () => {
@@ -139,8 +140,4 @@ document.querySelectorAll('.update-quantity-link')
       console.log("this is the product-Id", productId);
     })
   })
-
-
-
-
 
