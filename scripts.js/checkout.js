@@ -210,6 +210,12 @@ document.querySelectorAll('.save-quantity-link')
       const productId = link.dataset.productId;
       console.log("this is the Saved product-Id", productId);
 
+      const quantityInput = document.querySelector('.quantity-input').value
+
+      const valueInput = Number(quantityInput);
+
+      console.log("this is the quantity input value", valueInput);
+
       const container = document.querySelector(
         `.js-cart-item-container-${productId}`
       );
