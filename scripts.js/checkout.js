@@ -5,12 +5,14 @@ import { formatCurrency } from './utils/money.js';
 
 let cartSummaryHTML = '';
 
-
+//for each item in the cart, find the matching product in the products array and add it to the cart summary HTML
 cart.forEach((cartItem) => {
   const productId = cartItem.productId;
 
+  //placeholder for the matching item selected from the products array
   let matchingProduct;
 
+  //loop through the products array to find the matching product for the cart item
   products.forEach((product) => {
     if (product.id === productId) {
       matchingProduct = product;
@@ -43,8 +45,10 @@ cart.forEach((cartItem) => {
             Update
           </span>
           <input class="quantity-input" type="number">
-          <span class="save-quantity-link link-primary">Save</span>
-          <span class="delete-quantity-link link-primary js-delete-link" data-product-id="${matchingProduct.id}">
+          <span  class="save-quantity-link link-primary" data-product-id="${matchingProduct.id}">
+            Save
+          </span>
+          <span  class="delete-quantity-link link-primary js-delete-link" data-product-id="${matchingProduct.id}">
             Delete
           </span>
         </div>
@@ -172,9 +176,9 @@ function updateCart() {
 /*
 14h. Make "save" appear when clicking "update".
 * when clicking "update", get the cart-item-container for the product, and add the class "is-editing-quantity" to the      container use.classlist.
-* in the checkout.css,  style the <input> & "save" link and ass display: none; (they will be invisible at the start)
-* The css "is-editing-quantity" .quantity-input [...] styles skenebts with class "quantity-input" inside the element with class "is-editing-quantity"
-* use this, and "dipslay: initial"; (rsert the display property) to make the <input> apper when editing the quantity. same for the "Save" link */
+* In the checkout.css,  style the <input> & "save" link and ass display: none; (they will be invisible at the start).
+* The css ".is-editing-quantity" .quantity-input [...] styles elements with class "quantity-input" inside an element with class "is-editing-quantity"
+* use this, and "dipslay: initial"; (resets the display property) to make the <input> appear when editing the quantity. same for the "Save" link */
 
 
 document.querySelectorAll('.update-quantity-link')
@@ -188,9 +192,31 @@ document.querySelectorAll('.update-quantity-link')
       );
 
       container.classList.add('is-editing-quantity');
-
-      
     })
 
-
   })
+
+
+
+/*
+14i, similar css selector as 14h, make the "update and save" links disappear when editing the quantity.
+14j. Now we'll implement switching between "update and save"   
+* Add "click" event listener to all save links. when clicking "save". do the opposite of "update": get the cart-item-container for the product,  and remove the class "is-editing-quantity". This should reverse all the styling that's applied when editing the quantity.*/
+
+
+document.querySelectorAll('.save-quantity-link')
+  .forEach((link) => {
+    link.addEventListener('click', () => {
+      const productId = link.dataset.productId;
+      console.log("this is the Saved product-Id", productId);
+
+      const container = document.querySelector(
+        `.js-cart-item-container-${productId}`
+      );
+
+      container.classList.remove('is-editing-quantity');
+
+    })
+  })
+
+
