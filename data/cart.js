@@ -68,3 +68,16 @@ export function removeFromCart(productId){
   saveToStorage();
 
 }
+
+/*
+14l. In cart.js create a function updateQuantity(productId, newQuantity) which will find a matching productId in the cart, and update its quantity to th new quatity(remember to save to storage after).
+* then, import and use this function when clicking the "save" link. */
+
+export function updateQuantity(productId, newQuantity){
+  cart.forEach((cartItem) => {
+    if (cartItem.productId === productId){
+      cartItem.quantity = newQuantity;
+    }
+    saveToStorage();
+  })
+}
