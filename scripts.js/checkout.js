@@ -1,4 +1,4 @@
-import { cart, removeFromCart, calculateQuantityCarts } from '../data/cart.js';
+import { cart, removeFromCart, calculateQuantityCarts, updateQuantity } from '../data/cart.js';
 import { products } from '../data/products.js';
 import { formatCurrency } from './utils/money.js';
 
@@ -128,6 +128,7 @@ function updateCart() {
   const cartHeaderCheckout = document.querySelector('.js-cart-checkout')
 
 
+
   // Ternary operator: condition ? valueIfTrue : valueIfFalse
   // If cartQuantity is exactly 1, use the singular 'item'; otherwise use the plural 'items'.
   // Each ${...} is evaluated separately: the first inserts the number, the second inserts the word.
@@ -203,26 +204,34 @@ document.querySelectorAll('.update-quantity-link')
 14j. Now we'll implement switching between "update and save"   
 * Add "click" event listener to all save links. when clicking "save". do the opposite of "update": get the cart-item-container for the product,  and remove the class "is-editing-quantity". This should reverse all the styling that's applied when editing the quantity.*/
 
+// 14k. when clicking "Save", use the DOM to get the quantity <input> value, and this will be the new quantity of the product in the cart.
 
 document.querySelectorAll('.save-quantity-link')
+
   .forEach((link) => {
     link.addEventListener('click', () => {
       const productId = link.dataset.productId;
       console.log("this is the Saved product-Id", productId);
 
-      const quantityInput = document.querySelector('.quantity-input').value
-
-      const valueInput = Number(quantityInput);
-
-      console.log("this is the quantity input value", valueInput);
 
       const container = document.querySelector(
         `.js-cart-item-container-${productId}`
       );
 
+      const newQuantity = Number(container.querySelector('.quantity-input').value);
+
+      if ( newQuantity < 1 || !Number.isInteger(newQuantity)) {
+        return;
+      }
+
+      updateQuantity(productId, newQuantity);
+      updateCart(); 
+
+      container.querySelector('.quantity-label').innerHTML = newQuantity;  
       container.classList.remove('is-editing-quantity');
 
-    })
+      console.log("this is Saved product-Id", productId);
+  
+    });
   })
-
 
