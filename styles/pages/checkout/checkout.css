@@ -116,14 +116,14 @@
 }
 
 
-/* update input cart quantity */
+/* -------------- update input cart quantity -------------*/
 .quantity-input{
   font-size: 16px;
   width: 30px;
   display: none;
 }
 
-/* save quantity updateLink */
+/* -------------- save quantity updateLink -------------- */
 .save-quantity-link {
   display: none;
 }
@@ -141,6 +141,12 @@
   display: initial;
 }
 
+
+/* --------------- hide the spinners in the input ---------- */
+.quantity-input::-webkit-inner-spin-button,
+.quantity-input::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+}
 
 
 @media (max-width: 1000px) {
