@@ -204,34 +204,39 @@ document.querySelectorAll('.update-quantity-link')
 14j. Now we'll implement switching between "update and save"   
 * Add "click" event listener to all save links. when clicking "save". do the opposite of "update": get the cart-item-container for the product,  and remove the class "is-editing-quantity". This should reverse all the styling that's applied when editing the quantity.*/
 
+
+function saveQuantity(productId) {
+  const container = document.querySelector(
+    `.js-cart-item-container-${productId}`
+  );
+
+
+  const newQuantity = Number(container.querySelector('.quantity-input').value);
+
+  // Validate the new quantity: it should be an integer between 1 and 1000 and not a decimal number. If the new quantity is invalid, we simply return and do not update the cart.
+  if (newQuantity < 1 || newQuantity > 1000 || !Number.isInteger(newQuantity)) {
+    return;
+  }
+
+  // If the new value is valid, call updateQuantity() (from cart.js) to replace the product's quantity in the cart array and save it.
+  // Then call updateCart() to recalculate the total and update the cart quantity in the header.
+  updateQuantity(productId, newQuantity);
+  updateCart();
+
+  container.querySelector('.quantity-label').innerHTML = newQuantity;
+  container.classList.remove('is-editing-quantity');
+
+  console.log("this is Saved product-Id", productId);
+
+}
+
+
 // 14k. when clicking "Save", use the DOM to get the quantity <input> value, and this will be the new quantity of the product in the cart.
 
+//event listerner "click" on 'Save button'
 document.querySelectorAll('.save-quantity-link')
-
-  .forEach((link) => {
+  .forEach(link => {
     link.addEventListener('click', () => {
-      const productId = link.dataset.productId;
-      console.log("this is the Saved product-Id", productId);
-
-
-      const container = document.querySelector(
-        `.js-cart-item-container-${productId}`
-      );
-
-      const newQuantity = Number(container.querySelector('.quantity-input').value);
-
-      if ( newQuantity < 1 || !Number.isInteger(newQuantity)) {
-        return;
-      }
-
-      updateQuantity(productId, newQuantity);
-      updateCart(); 
-
-      container.querySelector('.quantity-label').innerHTML = newQuantity;  
-      container.classList.remove('is-editing-quantity');
-
-      console.log("this is Saved product-Id", productId);
-  
-    });
+      saveQuantity(link.dataset.productId)
+    })
   })
-
