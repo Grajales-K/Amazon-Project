@@ -44,7 +44,7 @@ cart.forEach((cartItem) => {
           <span class="update-quantity-link link-primary" data-product-id="${matchingProduct.id}">
             Update
           </span>
-          <input class="quantity-input" type="number">
+          <input class="quantity-input" type="number" data-product-id="${matchingProduct.id}">
           <span  class="save-quantity-link link-primary" data-product-id="${matchingProduct.id}">
             Save
           </span>
@@ -235,8 +235,23 @@ function saveQuantity(productId) {
 
 //event listerner "click" on 'Save button'
 document.querySelectorAll('.save-quantity-link')
-  .forEach(link => {
+  .forEach((link) => {
     link.addEventListener('click', () => {
       saveQuantity(link.dataset.productId)
+    })
+  })
+
+
+
+/* 14m. try to come up with more features such as:
+* Validacion between 1 and 1000,
+* Add keyboard support (allow updating by pressin 'enter' key) */
+
+document.querySelectorAll('.quantity-input')
+  .forEach((input) => {
+    input.addEventListener('keydown', (event) => {
+      if( event.key === 'Enter'){
+        saveQuantity(input.dataset.productId)
+      }
     })
   })
