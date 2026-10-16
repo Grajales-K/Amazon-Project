@@ -5,7 +5,7 @@ import { formatCurrency } from './utils/money.js';
 
 hello();
 
-console.log(daysjs());
+console.log(dayjs());
 
 let cartSummaryHTML = '';
 
