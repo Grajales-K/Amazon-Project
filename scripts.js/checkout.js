@@ -3,6 +3,10 @@ import { products } from '../data/products.js';
 import { formatCurrency } from './utils/money.js';
 
 
+hello();
+
+console.log(daysjs());
+
 let cartSummaryHTML = '';
 
 //for each item in the cart, find the matching product in the products array and add it to the cart summary HTML
@@ -250,7 +254,7 @@ document.querySelectorAll('.save-quantity-link')
 document.querySelectorAll('.quantity-input')
   .forEach((input) => {
     input.addEventListener('keydown', (event) => {
-      if( event.key === 'Enter'){
+      if (event.key === 'Enter') {
         saveQuantity(input.dataset.productId)
       }
     })
