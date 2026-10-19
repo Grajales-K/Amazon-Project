@@ -7,6 +7,11 @@ hello();
 
 console.log(dayjs());
 
+const deliveryDay = today.add(7, 'days');
+deliveryDay.format('dddd, MMMM D'); //This is according to the dayjs documentation, the format() method is used to format a date object into a string representation based on the specified format. In this case, 'dddd' represents the full name of the day of the week, 'MMMM' represents the full name of the month, and 'D' represents the day of the month without leading zeros. So, deliveryDay.format('dddd, MMMM D') will return a string like "Tuesday, June 21" if today is June 14th.
+console.log(deliveryDay);
+
+
 let cartSummaryHTML = '';
 
 //for each item in the cart, find the matching product in the products array and add it to the cart summary HTML
