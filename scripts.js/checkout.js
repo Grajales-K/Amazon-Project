@@ -1,13 +1,16 @@
 import { cart, removeFromCart, calculateQuantityCarts, updateQuantity } from '../data/cart.js';
 import { products } from '../data/products.js';
 import { formatCurrency } from './utils/money.js';
+import { hello } from 'https://unpkg.com/supersimpledev@1.0.1/hello.esm.js';
+import dayjs from 'https://unpkg.com/supersimpledev@8.5.0/dayjs/esm/index.js';
 
 
 hello();
 
-console.log(dayjs());
+const today = dayjs();
 
 const deliveryDay = today.add(7, 'days');
+
 deliveryDay.format('dddd, MMMM D'); //This is according to the dayjs documentation, the format() method is used to format a date object into a string representation based on the specified format. In this case, 'dddd' represents the full name of the day of the week, 'MMMM' represents the full name of the month, and 'D' represents the day of the month without leading zeros. So, deliveryDay.format('dddd, MMMM D') will return a string like "Tuesday, June 21" if today is June 14th.
 console.log(deliveryDay);
 
