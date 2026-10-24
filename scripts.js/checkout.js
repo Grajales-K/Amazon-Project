@@ -116,24 +116,25 @@ function deliveryOptiosHTML() {
   deliveryOptions.forEach((deliveryOption) => {
     const today = daysjs();
     const deliveryDate = today.add(
+      //how many option we want to add.
       deliveryOption.deliveryDays, 'days'
     );
     const dateString = deliveryDate.format(
       'dddd, MMMM D'
     );
 
-    // const priceString = 
+    const priceString = delivery.priceCents === 0 ? 'FREE' : '$${deliveryOption.princeCents / 100} - Shipping';
     `
       <div class="delivery-option">
-      <input type="radio" class="delivery-option-input" name="delivery-${matchingProduct.id}">
-        <div>
-          <div class="delivery-option-date">
-            ${dateString}
+        <input type="radio" class="delivery-option-input" name="delivery-${matchingProduct.id}">
+          <div>
+            <div class="delivery-option-date">
+              ${dateString}
+            </div>
+            <div class="delivery-option-price">
+              ${priceString}
+            </div>
           </div>
-          <div class="delivery-option-price">
-            $9.99 - Shipping
-          </div>
-        </div>
       </div>
     `
   }
