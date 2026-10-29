@@ -9,17 +9,14 @@ let cartSummaryHTML = '';
 cart.forEach((cartItem) => {
   const productId = cartItem.productId;
 
-  //placeholder for the matching item selected from the products array
-  let matchingProduct;
+  const matchingProduct = products.find((product) => product.id === productId);
 
-  //loop through the products array to find the matching product for the cart item
-  products.forEach((product) => {
-    if (product.id === productId) {
-      matchingProduct = product;
-    }
-  });
 
-  console.log(matchingProduct);
+  // Skip cart items whose product no longer exists, so the checkout doesn't break
+  if(!matchingProduct){
+    console.warn(`product ${productId} not found, Skipping`);
+    return;
+  }
 
   cartSummaryHTML += `
     <div class="cart-item-container js-cart-item-container-${matchingProduct.id}">
