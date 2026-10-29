@@ -64,7 +64,7 @@ document.querySelector('.js-products-grid').innerHTML = productHTML;
 
 updateCartQuantity(); //update the cart quantity in the header when the page loads
 
-function updateCartQuantity(){
+function updateCartQuantity() {
   const cartQuantity = calculateQuantityCarts();
 
   //update the cart quantity in the header
@@ -89,15 +89,19 @@ document.querySelectorAll('.js-add-cart').forEach((button) => {
       `.js-display-add-message-${productId}`
     );
 
-    addToCart(productId, valueSelection);
+    const wasAdded = addToCart(productId, valueSelection);
     updateCartQuantity();
 
-    displayMessageAdded.classList.add('added-to-cart-visible');
+    // --------- condition to show the added pop-up message if it was added. ----
+    if (wasAdded) {
+      displayMessageAdded.classList.add('added-to-cart-visible');
 
-    clearTimeout(addedMessageTimeout[productId]);
 
-    addedMessageTimeout[productId] = setTimeout(() => {
-      displayMessageAdded.classList.remove('added-to-cart-visible');
-    }, 2000);
+      clearTimeout(addedMessageTimeout[productId]);
+
+      addedMessageTimeout[productId] = setTimeout(() => {
+        displayMessageAdded.classList.remove('added-to-cart-visible');
+      }, 2000);
+    }
   });
 });
