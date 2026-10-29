@@ -1,4 +1,4 @@
-import { cart, removeFromCart, calculateQuantityCarts, updateQuantity } from '../data/cart.js';
+import { cart, removeFromCart, calculateQuantityCarts, updateQuantity, isValidQuantity } from '../data/cart.js';
 import { products } from '../data/products.js';
 import { formatCurrency } from './utils/money.js';
 
@@ -127,59 +127,8 @@ function updateCart() {
 
   const cartHeaderCheckout = document.querySelector('.js-cart-checkout')
 
-
-
-  // Ternary operator: condition ? valueIfTrue : valueIfFalse
-  // If cartQuantity is exactly 1, use the singular 'item'; otherwise use the plural 'items'.
-  // Each ${...} is evaluated separately: the first inserts the number, the second inserts the word.
   cartHeaderCheckout.innerHTML = `${cartQuantity} ${cartQuantity === 1 ? 'item' : 'items'}`;
 }
-
-
-// let's do interactive step by step th 'update button'
-// 14f.in checkout.js get all the update links from the page and add a "click " event listener to each link.also, attach the productId to each link, when clicking, get the product ID AND  console.log.
-
-// update event listener for the update quantity link
-// document.querySelectorAll('.update-quantity-link')
-//   .forEach((link) => {
-//     link.addEventListener("click", () => {
-//       const productId = link.dataset.productId;
-//       console.log("this is the product-Id", productId);
-//     })
-//   })
-
-
-/*  
-14g. add 2 HTML element after the "update" link
-* An <input class="quantity-input".(for entering a new quantity)
-* A <span class="save-quantity-link">save</span> (for saving the new quantity)
-* Style the <input> and set its width to 30px (put the style in the file: css)
-* Add a class "link-primary" to the <span> (for styling the link)*/
-
-// document.querySelectorAll('.update-quantity-link')
-//   .forEach((link) => {
-//     link.addEventListener("click", () => {
-//       const productId = link.dataset.productId;
-//       console.log("this is the product-Id", productId);
-//       const input = document.createElement('input');
-//       input.classList.add('quantity-input');
-//       input.setAttribute('type', 'number');
-
-//       console.log(input);
-
-//       const saveSpan = document.createElement('span')
-//       saveSpan.classList.add('save-quantity-link', 'link-primary');
-//       saveSpan.textContent = 'save';
-
-//     })
-//   })
-
-/*
-14h. Make "save" appear when clicking "update".
-* when clicking "update", get the cart-item-container for the product, and add the class "is-editing-quantity" to the      container use.classlist.
-* In the checkout.css,  style the <input> & "save" link and ass display: none; (they will be invisible at the start).
-* The css ".is-editing-quantity" .quantity-input [...] styles elements with class "quantity-input" inside an element with class "is-editing-quantity"
-* use this, and "dipslay: initial"; (resets the display property) to make the <input> appear when editing the quantity. same for the "Save" link */
 
 
 document.querySelectorAll('.update-quantity-link')
@@ -198,13 +147,6 @@ document.querySelectorAll('.update-quantity-link')
   })
 
 
-
-/*
-14i, similar css selector as 14h, make the "update and save" links disappear when editing the quantity.
-14j. Now we'll implement switching between "update and save"   
-* Add "click" event listener to all save links. when clicking "save". do the opposite of "update": get the cart-item-container for the product,  and remove the class "is-editing-quantity". This should reverse all the styling that's applied when editing the quantity.*/
-
-
 function saveQuantity(productId) {
   const container = document.querySelector(
     `.js-cart-item-container-${productId}`
@@ -213,8 +155,8 @@ function saveQuantity(productId) {
 
   const newQuantity = Number(container.querySelector('.quantity-input').value);
 
-  // Validate the new quantity: it should be an integer between 1 and 1000 and not a decimal number. If the new quantity is invalid, we simply return and do not update the cart.
-  if (newQuantity < 1 || newQuantity > 1000 || !Number.isInteger(newQuantity)) {
+  // Validate the new quantity
+  if (!isValidQuantity(newQuantity)) {
     return;
   }
 
