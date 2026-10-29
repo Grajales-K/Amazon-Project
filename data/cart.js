@@ -74,10 +74,11 @@ export function removeFromCart(productId){
 * then, import and use this function when clicking the "save" link. */
 
 export function updateQuantity(productId, newQuantity){
-  cart.forEach((cartItem) => {
-    if (cartItem.productId === productId){
-      cartItem.quantity = newQuantity;
-    }
-    saveToStorage();
-  })
+  const matchingItem = cart.find((cartItem) => cartItem.productId === productId);
+
+  if (matchingItem){
+    matchingItem.quantity = newQuantity;
+  }
+
+  saveToStorage();
 }
