@@ -1,24 +1,11 @@
 import { cart, removeFromCart, calculateQuantityCarts, updateQuantity, updateDeliveryOption } from '../../data/cart.js';
 import { products, getProduct } from '../../data/products.js';
 import { formatCurrency } from '../utils/money.js';
-import { hello } from 'https://unpkg.com/supersimpledev@1.0.1/hello.esm.js';
 import dayjs from 'https://unpkg.com/supersimpledev@8.5.0/dayjs/esm/index.js';
 import { deliveryOptions, getDeliveryOption } from '../../data/deliveryOptions.js';
-
-
-hello();
-
-const today = dayjs();
-
-const deliveryDay = today.add(7, 'days');
-
-deliveryDay.format('dddd, MMMM D'); //This is according to the dayjs documentation, the format() method is used to format a date object into a string representation based on the specified format. In this case, 'dddd' represents the full name of the day of the week, 'MMMM' represents the full name of the month, and 'D' represents the day of the month without leading zeros. So, deliveryDay.format('dddd, MMMM D') will return a string like "Tuesday, June 21" if today is June 14th.
-console.log(deliveryDay);
-
+import { renderPaymentSummary } from './paymentSummary.js';
 
 export function renderOrderSummary() {
-
-
   let cartSummaryHTML = '';
 
   //for each item in the cart, find the matching product in the products array and add it to the cart summary HTML
@@ -28,15 +15,11 @@ export function renderOrderSummary() {
     //placeholder for the matching item selected from the products array
     const matchingProduct = getProduct(productId)
 
-
-
     console.log(matchingProduct);
 
     const deliveryOptionId = cartItem.deliveryOptionId;
 
     const deliveryOption = getDeliveryOption(deliveryOptionId);
-
-
 
     const today = dayjs();
     const deliveryDate = today.add(
@@ -46,8 +29,6 @@ export function renderOrderSummary() {
     const dateString = deliveryDate.format(
       'dddd, MMMM D'
     );
-
-
 
     cartSummaryHTML += `
       <div class="cart-item-container js-cart-item-container-${matchingProduct.id}">
@@ -156,6 +137,7 @@ export function renderOrderSummary() {
 
         updateCart();//to update the cart quantity in the header when an item is removed and sent to the cart header.
 
+        renderPaymentSummary(); //re-render the payment summary to reflect the updated cart after an item is removed
       })
 
     })
@@ -168,11 +150,6 @@ export function renderOrderSummary() {
 
     const cartHeaderCheckout = document.querySelector('.js-cart-checkout')
 
-
-
-    // Ternary operator: condition ? valueIfTrue : valueIfFalse
-    // If cartQuantity is exactly 1, use the singular 'item'; otherwise use the plural 'items'.
-    // Each ${...} is evaluated separately: the first inserts the number, the second inserts the word, taking the variable and making and expression to return the correct word 'item/s' based on the quantity.
     cartHeaderCheckout.innerHTML = `${cartQuantity} ${cartQuantity === 1 ? 'item' : 'items'}`;
   }
 
@@ -188,7 +165,6 @@ export function renderOrderSummary() {
 
         container.classList.add('is-editing-quantity');
       })
-
     })
 
   function saveQuantity(productId) {
@@ -214,6 +190,8 @@ export function renderOrderSummary() {
 
     console.log("this is Saved product-Id", productId);
 
+    renderPaymentSummary(); //re-render the payment summary to reflect the updated cart after an item is removed
+
   }
 
   //event listerner "click" on 'Save button'
@@ -221,6 +199,7 @@ export function renderOrderSummary() {
     .forEach((link) => {
       link.addEventListener('click', () => {
         saveQuantity(link.dataset.productId)
+        renderPaymentSummary(); //re-render the payment summary to reflect the updated cart after an item is removed
       })
     })
 
@@ -229,6 +208,7 @@ export function renderOrderSummary() {
       input.addEventListener('keydown', (event) => {
         if (event.key === 'Enter') {
           saveQuantity(input.dataset.productId)
+          renderPaymentSummary(); //re-render the payment summary to reflect the updated cart after an item is removed
         }
       })
     })
@@ -240,6 +220,7 @@ export function renderOrderSummary() {
         const { productId, deliveryOptionId } = element.dataset;
         updateDeliveryOption(productId, deliveryOptionId)
         renderOrderSummary(); //re-render the order summary to reflect the updated delivery option
+        renderPaymentSummary(); //re-render the payment summary to reflect the updated cart after an item is removed
       });
     });
 
