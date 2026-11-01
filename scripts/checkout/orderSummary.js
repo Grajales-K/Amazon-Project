@@ -226,3 +226,13 @@ export function renderOrderSummary() {
 
 }
 
+
+// ------- exercises lesson15 15a --------
+
+// this code will deleted after reviewed, this is just to avoid create a new files and deleted after
+
+// using the dayjs, get the date 5 daus after today and display it in the format: <month> <day of the month>
+
+const today = dayjs();
+const fiveDaysLater = today.add(5, 'days');
+console.log(fiveDaysLater.format('MMMM D'), "exercise 15a display the month and the day",);
