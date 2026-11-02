@@ -235,4 +235,9 @@ export function renderOrderSummary() {
 
 const today = dayjs();
 const fiveDaysLater = today.add(5, 'days');
-console.log(fiveDaysLater.format('MMMM D'), "exercise 15a display the month and the day",);
+console.log(fiveDaysLater.format('MMMM D'), "exercise 15a display the month and the day",); //November 6
+
+//15b. Calcula one month after today and displa it in the same format
+
+const OneMonthLater = today.add(1, 'month');
+console.log(OneMonthLater.format('MMMM D'), "exercise 15b display the month and the day",); //December 1
