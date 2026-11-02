@@ -231,13 +231,17 @@ export function renderOrderSummary() {
 
 // this code will deleted after reviewed, this is just to avoid create a new files and deleted after
 
-// using the dayjs, get the date 5 daus after today and display it in the format: <month> <day of the month>
+// -------- 15a. Using the dayjs, get the date 5 daus after today and display it in the format: <month> <day of the month>
 
 const today = dayjs();
 const fiveDaysLater = today.add(5, 'days');
 console.log(fiveDaysLater.format('MMMM D'), "exercise 15a display the month and the day",); //November 6
 
-//15b. Calcula one month after today and displa it in the same format
-
+// ------- 15b. Calcula one month after today and displa it in the same format
 const OneMonthLater = today.add(1, 'month');
 console.log(OneMonthLater.format('MMMM D'), "exercise 15b display the month and the day",); //December 1
+
+// ------- 15b. Daysjs has a .substrac(...) method withc subtracts time from a date. Calculate 1 month before today and display it.
+
+const OneMonthBefore = today.subtract(1, 'month')
+console.log(OneMonthBefore.format('MMMM D'), "exercise 15c display the month and the day",); //October 1
