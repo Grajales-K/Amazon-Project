@@ -251,4 +251,18 @@ console.log(OneMonthBefore.format('MMMM D'), "exercise 15c display the month and
 const dayOfweek = today.format('dddd');
 console.log(dayOfweek, "exercise 15d display the day of the week",); //Thursday
 
-// ------- 15e. Create a function isWeekend(date) that takes a dayjs object, and returns whether the date is 'Saturday' or 'Sunday'. 
+// ------- 15e. Create a function isWeekend(date) that takes a dayjs object, and returns whether the date is 'Saturday' or 'Sunday'. use the solution fro 15d test wit a differents dates
+
+const dayOfWeek = today.format('dddd').toLowerCase();
+console.log(dayOfWeek, "exercise 15d display the day of the week"); // thursday
+
+// ------- 15e. isWeekend(date) using the solution from 15d
+
+function isWeekend(date) {
+  const dayOfWeek = date.format('dddd').toLowerCase();
+  return dayOfWeek === 'saturday' || dayOfWeek === 'sunday';
+}
+
+// Test with different dates
+console.log(isWeekend(today), "today");                        // false 
+console.log(isWeekend(dayjs('2026-11-07')), "saturday");   
