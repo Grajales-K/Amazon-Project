@@ -245,3 +245,9 @@ console.log(OneMonthLater.format('MMMM D'), "exercise 15b display the month and 
 
 const OneMonthBefore = today.subtract(1, 'month')
 console.log(OneMonthBefore.format('MMMM D'), "exercise 15c display the month and the day",); //October 1
+
+// ------- 15d. Get day from dayjs and display it in this format '<Day of week>' (format should be 'monday', 'tuesday', etc.)
+
+const dayOfweek = today.format('dddd');
+console.log(dayOfweek, "exercise 15d display the day of the week",); //Thursday
+
