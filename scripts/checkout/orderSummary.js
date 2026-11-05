@@ -251,3 +251,4 @@ console.log(OneMonthBefore.format('MMMM D'), "exercise 15c display the month and
 const dayOfweek = today.format('dddd');
 console.log(dayOfweek, "exercise 15d display the day of the week",); //Thursday
 
+// ------- 15e. Create a function isWeekend(date) that takes a dayjs object, and returns whether the date is 'Saturday' or 'Sunday'. 
