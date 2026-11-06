@@ -265,4 +265,6 @@ function isWeekend(date) {
 
 // Test with different dates
 console.log(isWeekend(today), "today");                        // false 
-console.log(isWeekend(dayjs('2026-11-07')), "saturday");   
+console.log(isWeekend(dayjs('2026-11-07')), "saturday"); 
+console.log(isWeekend(dayjs('2026-11-08')), "sunday");         // true
+console.log(isWeekend(dayjs('2026-11-09')), "monday");         // false  
