@@ -224,10 +224,9 @@ export function renderOrderSummary() {
       });
     });
 
-}
+};
 
-
-// ------- exercises lesson15 15a --------
+console.log(' ------- exercises lesson15 a - e --------')
 
 // this code will deleted after reviewed, this is just to avoid create a new files and deleted after
 
@@ -253,11 +252,6 @@ console.log(dayOfweek, "exercise 15d display the day of the week",); //Thursday
 
 // ------- 15e. Create a function isWeekend(date) that takes a dayjs object, and returns whether the date is 'Saturday' or 'Sunday'. use the solution fro 15d test wit a differents dates
 
-const dayOfWeek = today.format('dddd').toLowerCase();
-console.log(dayOfWeek, "exercise 15d display the day of the week"); // thursday
-
-// ------- 15e. isWeekend(date) using the solution from 15d
-
 function isWeekend(date) {
   const dayOfWeek = date.format('dddd').toLowerCase();
   return dayOfWeek === 'saturday' || dayOfWeek === 'sunday';
@@ -265,6 +259,7 @@ function isWeekend(date) {
 
 // Test with different dates
 console.log(isWeekend(today), "today");                        // false 
-console.log(isWeekend(dayjs('2026-11-07')), "saturday"); 
+console.log(isWeekend(dayjs('2026-11-07')), "saturday");       // true
 console.log(isWeekend(dayjs('2026-11-08')), "sunday");         // true
 console.log(isWeekend(dayjs('2026-11-09')), "monday");         // false  
+
