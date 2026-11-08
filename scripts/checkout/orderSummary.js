@@ -4,6 +4,7 @@ import { formatCurrency } from '../utils/money.js';
 import dayjs from 'https://unpkg.com/supersimpledev@8.5.0/dayjs/esm/index.js';
 import { deliveryOptions, getDeliveryOption } from '../../data/deliveryOptions.js';
 import { renderPaymentSummary } from './paymentSummary.js';
+import { isSatSun } from  '../weekDay.js';
 
 export function renderOrderSummary() {
   let cartSummaryHTML = '';
@@ -252,14 +253,17 @@ console.log(dayOfweek, "exercise 15d display the day of the week",); //Thursday
 
 // ------- 15e. Create a function isWeekend(date) that takes a dayjs object, and returns whether the date is 'Saturday' or 'Sunday'. use the solution fro 15d test wit a differents dates
 
-function isWeekend(date) {
-  const dayOfWeek = date.format('dddd').toLowerCase();
-  return dayOfWeek === 'saturday' || dayOfWeek === 'sunday';
-}
+// function isWeekend(date) {
+//   const dayOfWeek = date.format('dddd').toLowerCase();
+//   return dayOfWeek === 'saturday' || dayOfWeek === 'sunday';
+// }
 
 // Test with different dates
-console.log(isWeekend(today), "today");                        // false 
-console.log(isWeekend(dayjs('2026-11-07')), "saturday");       // true
-console.log(isWeekend(dayjs('2026-11-08')), "sunday");         // true
-console.log(isWeekend(dayjs('2026-11-09')), "monday");         // false  
+console.log(isSatSun(today), "today");                        // false 
+console.log(isSatSun(dayjs('2026-11-07')), "saturday");       // true
+console.log(isSatSun(dayjs('2026-11-08')), "sunday");         // true
+console.log(isSatSun(dayjs('2026-11-09')), "monday");         // false  
 
+// ------- 15f. Move isweekend() into a separate file and use export default. Import this function in another file and run it.
+
+// ------- 15g. We can also rename a default export when we inport. In 15f, when we "import isSatSun" and use this new name to the function.
