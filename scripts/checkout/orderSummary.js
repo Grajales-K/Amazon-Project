@@ -253,11 +253,13 @@ console.log(dayOfweek, "exercise 15d display the day of the week",); //Thursday
 
 // ------- 15e. Create a function isWeekend(date) that takes a dayjs object, and returns whether the date is 'Saturday' or 'Sunday'. use the solution fro 15d test wit a differents dates
 
+
 // function isWeekend(date) {
 //   const dayOfWeek = date.format('dddd').toLowerCase();
 //   return dayOfWeek === 'saturday' || dayOfWeek === 'sunday';
 // }
 
+// data coming from weekDay.js
 // Test with different dates
 console.log(isSatSun(today), "today");                        // false 
 console.log(isSatSun(dayjs('2026-11-07')), "saturday");       // true
