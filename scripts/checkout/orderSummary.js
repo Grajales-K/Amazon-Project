@@ -133,12 +133,11 @@ export function renderOrderSummary() {
         removeFromCart(productId);
         // console.log("this is the carrito", cart);
 
-        const container = document.querySelector(`.js-cart-item-container-${productId}`);
-        container.remove();
+        // updateCart();//to update the cart quantity in the header when an item is removed and sent to the cart header.
 
-        updateCart();//to update the cart quantity in the header when an item is removed and sent to the cart header.
+        renderOrderSummary(); //re-render the order summary to reflect the updated delivery option
 
-        renderPaymentSummary(); //re-render the payment summary to reflect the updated cart after an item is removed
+        renderPaymentSummary(); //re-render the payment summary to reflect the updated cart after an item is removed. 
       })
 
     })
@@ -269,3 +268,7 @@ console.log(isSatSun(dayjs('2026-11-09')), "monday");         // false
 // ------- 15f. Move isweekend() into a separate file and use export default. Import this function in another file and run it.
 
 // ------- 15g. We can also rename a default export when we inport. In 15f, when we "import isSatSun" and use this new name to the function.
+
+// ------- 15h. when deletinh s product from the cart, instead of using the DOM and updating the page directly with delete(), generate the hml for the order summary.
+
+//  update in lines lines 129-143
