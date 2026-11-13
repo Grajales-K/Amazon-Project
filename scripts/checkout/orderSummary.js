@@ -6,6 +6,7 @@ import { deliveryOptions, getDeliveryOption } from '../../data/deliveryOptions.j
 import { renderPaymentSummary } from './paymentSummary.js';
 import  isSatSun  from  '../weekDay.js';
 
+
 export function renderOrderSummary() {
   let cartSummaryHTML = '';
 
@@ -144,7 +145,6 @@ export function renderOrderSummary() {
 
   updateCart(); //update the cart quantity in the header when the page loads
 
-
   function updateCart() {
     const cartQuantity = calculateQuantityCarts();
 
@@ -272,3 +272,7 @@ console.log(isSatSun(dayjs('2026-11-09')), "monday");         // false
 // ------- 15h. when deletinh s product from the cart, instead of using the DOM and updating the page directly with delete(), generate the hml for the order summary.
 
 //  update in lines lines 129-143
+
+// ------- 15fi. In the payment summary on the right, the number in the first line "item (3}": is supposed to show the cart quantity. howover, this number is always 3. replace this number with the actual cart quantity and make sure it updates whenever we change the cart.
+// done in paymentSummary.js line 22 and 31
+
