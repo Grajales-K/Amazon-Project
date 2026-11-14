@@ -273,6 +273,9 @@ console.log(isSatSun(dayjs('2026-11-09')), "monday");         // false
 
 //  update in lines lines 129-143
 
-// ------- 15fi. In the payment summary on the right, the number in the first line "item (3}": is supposed to show the cart quantity. howover, this number is always 3. replace this number with the actual cart quantity and make sure it updates whenever we change the cart.
+// ------- 15i. In the payment summary on the right, the number in the first line "item (3}": is supposed to show the cart quantity. howover, this number is always 3. replace this number with the actual cart quantity and make sure it updates whenever we change the cart.
 // done in paymentSummary.js line 22 and 31
+
+// ------- 15j. Create a new file in the checkout folder callad checkoutHeader.js, create a function renderCheckoutHeader, generate the HTML, and display it on the page. note: insert the correct cart quantity into the HTML.
+
 
