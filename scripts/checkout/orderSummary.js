@@ -2,7 +2,7 @@ import { cart, removeFromCart, calculateQuantityCarts, updateQuantity, updateDel
 import { products, getProduct } from '../../data/products.js';
 import { formatCurrency } from '../utils/money.js';
 import dayjs from 'https://unpkg.com/supersimpledev@8.5.0/dayjs/esm/index.js';
-import { deliveryOptions, getDeliveryOption } from '../../data/deliveryOptions.js';
+import { deliveryOptions, getDeliveryOption, calculateDeliveryDate } from '../../data/deliveryOptions.js';
 import { renderPaymentSummary } from './paymentSummary.js';
 import  isSatSun  from  '../weekDay.js';
 import { renderCheckoutHeader } from './checkoutHeader.js';
@@ -24,14 +24,7 @@ export function renderOrderSummary() {
 
     const deliveryOption = getDeliveryOption(deliveryOptionId);
 
-    const today = dayjs();
-    const deliveryDate = today.add(
-      //how many option we want to add.
-      deliveryOption.deliveryDays, 'days'
-    );
-    const dateString = deliveryDate.format(
-      'dddd, MMMM D'
-    );
+    const dateString = calculateDeliveryDate(deliveryOption);
 
     cartSummaryHTML += `
       <div class="cart-item-container js-cart-item-container-${matchingProduct.id}">
@@ -84,14 +77,8 @@ export function renderOrderSummary() {
     let html = '';
 
     deliveryOptions.forEach((deliveryOption) => {
-      const today = dayjs();
-      const deliveryDate = today.add(
-        //how many option we want to add.
-        deliveryOption.deliveryDays, 'days'
-      );
-      const dateString = deliveryDate.format(
-        'dddd, MMMM D'
-      );
+      const dateString = calculateDeliveryDate(deliveryOption);
+   
 
       const priceString = deliveryOption.priceCents
         === 0
@@ -220,11 +207,11 @@ console.log(' ------- exercises lesson15 a - e --------')
 
 const today = dayjs();
 const fiveDaysLater = today.add(5, 'days');
-console.log(fiveDaysLater.format('MMMM D'), "exercise 15a display the month and the day",); //November 6
+ //November 6
 
 // ------- 15b. Calcula one month after today and displa it in the same format
 const OneMonthLater = today.add(1, 'month');
-console.log(OneMonthLater.format('MMMM D'), "exercise 15b display the month and the day",); //December 1
+ //December 1
 
 // ------- 15b. Daysjs has a .substrac(...) method withc subtracts time from a date. Calculate 1 month before today and display it.
 
@@ -234,7 +221,7 @@ console.log(OneMonthBefore.format('MMMM D'), "exercise 15c display the month and
 // ------- 15d. Get day from dayjs and display it in this format '<Day of week>' (format should be 'monday', 'tuesday', etc.)
 
 const dayOfweek = today.format('dddd');
-console.log(dayOfweek, "exercise 15d display the day of the week",); //Thursday
+// console.log(dayOfweek, "exercise 15d display the day of the week",); //Thursday
 
 // ------- 15e. Create a function isWeekend(date) that takes a dayjs object, and returns whether the date is 'Saturday' or 'Sunday'. use the solution fro 15d test wit a differents dates
 
@@ -268,5 +255,8 @@ console.log(isSatSun(dayjs('2026-11-09')), "monday");         // false
 
 // ------- 15k. after deleting a product from the cart, re-render the checkout Header so the cart quantity is up-to-date. Note: use MVC instead of updating the page directly with the DOM.
 // done in lines 129-143
+
+// ------- 15i.In orderSummary.js, we have some code at the top that takes a deliveryOption, calculates the delivery date, and formats it.This code is repeated in deliveryOptionsHTML().Create a function to reuse this code. (Create a function calculateDeliveryDate(deliveryOption) in deliveryOptions.js, import and run this function in orderSummary.js).
+// done in deliveryOptions.js and orderSummary.js lines 49-51 and 55-57
 
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
