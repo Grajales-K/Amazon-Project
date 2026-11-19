@@ -5,6 +5,7 @@ import dayjs from 'https://unpkg.com/supersimpledev@8.5.0/dayjs/esm/index.js';
 import { deliveryOptions, getDeliveryOption } from '../../data/deliveryOptions.js';
 import { renderPaymentSummary } from './paymentSummary.js';
 import  isSatSun  from  '../weekDay.js';
+import { renderCheckoutHeader } from './checkoutHeader.js';
 
 
 export function renderOrderSummary() {
@@ -134,7 +135,7 @@ export function renderOrderSummary() {
         removeFromCart(productId);
         // console.log("this is the carrito", cart);
 
-        // updateCart();//to update the cart quantity in the header when an item is removed and sent to the cart header.
+        renderCheckoutHeader(); 
 
         renderOrderSummary(); //re-render the order summary to reflect the updated delivery option
 
@@ -142,16 +143,6 @@ export function renderOrderSummary() {
       })
 
     })
-
-  updateCart(); //update the cart quantity in the header when the page loads
-
-  function updateCart() {
-    const cartQuantity = calculateQuantityCarts();
-
-    const cartHeaderCheckout = document.querySelector('.js-cart-checkout')
-
-    cartHeaderCheckout.innerHTML = `${cartQuantity} ${cartQuantity === 1 ? 'item' : 'items'}`;
-  }
 
   document.querySelectorAll('.update-quantity-link')
     .forEach((link) => {
@@ -276,6 +267,10 @@ console.log(isSatSun(dayjs('2026-11-09')), "monday");         // false
 // ------- 15i. In the payment summary on the right, the number in the first line "item (3}": is supposed to show the cart quantity. howover, this number is always 3. replace this number with the actual cart quantity and make sure it updates whenever we change the cart.
 // done in paymentSummary.js line 22 and 31
 
-// ------- 15j. Create a new file in the checkout folder callad checkoutHeader.js, create a function renderCheckoutHeader, generate the HTML, and display it on the page. note: insert the correct cart quantity into the HTML.
+// ------- 15j. Create a new file in the checkout folder callad checkoutHeader.js, create a function renderCheckoutHeader, generate the HTML, and display it on the page. note: insert the correct cart quantity into the HTML. 
+// done in checkoutHeader.js and checkout.js and checkout.html
 
 
+// ------- 15k. after deleting a product from the cart, re-render the checkout Header so the cart quantity is up-to-date. Note: use MVC instead of updating the page directly with the DOM.
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
