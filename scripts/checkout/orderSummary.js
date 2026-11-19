@@ -174,7 +174,7 @@ export function renderOrderSummary() {
     // If the new value is valid, call updateQuantity() (from cart.js) to replace the product's quantity in the cart array and save it.
     // Then call updateCart() to recalculate the total and update the cart quantity in the header.
     updateQuantity(productId, newQuantity);
-    updateCart();
+    renderCheckoutHeader();
 
     container.querySelector('.quantity-label').innerHTML = newQuantity;
     container.classList.remove('is-editing-quantity');
