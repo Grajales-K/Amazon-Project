@@ -5,11 +5,16 @@ if (!cart) {
     [{
       productId: 'e43638ce-6aa0-4b85-b27f-e1d07eb678c6',
       quantity: 2,
+      deliveryOptionId: '1'
     },
     {
       productId: '15b6fc6f-327a-4ec4-896f-486349e85a3d',
       quantity: 1,
+      deliveryOptionId: '2'
+      
     }]
+
+  console.log(cart[0].deliveryOptionId, "aqui el 1")
 }
 
 
@@ -19,34 +24,26 @@ function saveToStorage() {
 
 }
 
-// ------------ validation number in the cart between 1 to 1000 -----------
-export function isValidQuantity(quantity) {
-  return Number.isInteger(quantity) && quantity >= 1 && quantity <= 1000;
-}
-
-
-
 export function addToCart(productId, valueSelection) {
+  let matchingItem;
 
-  const matchingItem = cart.find((cartItem) => cartItem.productId === productId);
-
-  const newQuantity = (matchingItem ? matchingItem.quantity : 0) + valueSelection;
-
-  if(!isValidQuantity(newQuantity)){
-    return false;
-  }
+  cart.forEach((cartItem) => {
+    if (productId === cartItem.productId) {
+      matchingItem = cartItem;
+    }
+  });
 
   if (matchingItem) {
     matchingItem.quantity += valueSelection;
   } else {
     cart.push({
       productId,
-      quantity: valueSelection
+      quantity: valueSelection,
+      deliveryOptionId: '1'
     });
   }
 
   saveToStorage();
-  return true;
 
 }
 
@@ -78,16 +75,28 @@ export function removeFromCart(productId) {
 
 }
 
-/*
-14l. In cart.js create a function updateQuantity(productId, newQuantity) which will find a matching productId in the cart, and update its quantity to th new quatity(remember to save to storage after).
-* then, import and use this function when clicking the "save" link. */
 
 export function updateQuantity(productId, newQuantity) {
-  const matchingItem = cart.find((cartItem) => cartItem.productId === productId);
+  cart.forEach((cartItem) => {
+    if (cartItem.productId === productId) {
+      cartItem.quantity = newQuantity;
+    }
+  })
+  saveToStorage();
+}
 
-  if (matchingItem) {
-    matchingItem.quantity = newQuantity;
-  }
+
+//  ---------- updating display delivery day on checkout page ----------
+export function updateDeliveryOption(productId, deliveryOptionId){
+  let matchingItem;
+
+  cart.forEach((cartItem) => {
+    if (productId === cartItem.productId) {
+      matchingItem = cartItem;
+    }
+  });
+
+  matchingItem.deliveryOptionId = deliveryOptionId;
 
   saveToStorage();
 }
