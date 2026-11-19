@@ -2,6 +2,8 @@ import { calculateQuantityCarts } from "../../data/cart.js";
 
 export function renderCheckoutHeader(){
     const cartQuantity = calculateQuantityCarts();
+    const itemsText = cartQuantity === 1 ? 'item' : 'items';
+    
 
     const renderCheckoutHeader = `
         <div class="header-content">
@@ -13,7 +15,7 @@ export function renderCheckoutHeader(){
             </div>
 
             <div class="checkout-header-middle-section">
-                Checkout (<a class="return-to-home-link js-cart-checkout" href="index.html">${cartQuantity} ${cartQuantity === 1 ? 'item' : 'items'}</a>)
+                Checkout (<a class="return-to-home-link js-cart-checkout" href="index.html">${cartQuantity} ${itemsText}</a>)
             </div>
 
             <div class="checkout-header-right-section">
