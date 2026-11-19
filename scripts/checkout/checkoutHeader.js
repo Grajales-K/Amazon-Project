@@ -1,7 +1,7 @@
-import { updateQuantity } from "../../data/cart.js";
+import { calculateQuantityCarts } from "../../data/cart.js";
 
 export function renderCheckoutHeader(){
-    const cartQuantity = updateQuantity();
+    const cartQuantity = calculateQuantityCarts();
 
     const renderCheckoutHeader = `
         <div class="header-content">
@@ -13,7 +13,7 @@ export function renderCheckoutHeader(){
             </div>
 
             <div class="checkout-header-middle-section">
-                Checkout (<a class="return-to-home-link js-cart-checkout" href="index.html">${cartQuantity}</a>)
+                Checkout (<a class="return-to-home-link js-cart-checkout" href="index.html">${cartQuantity} ${cartQuantity === 1 ? 'item' : 'items'}</a>)
             </div>
 
             <div class="checkout-header-right-section">
