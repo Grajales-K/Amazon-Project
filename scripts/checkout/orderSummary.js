@@ -172,14 +172,11 @@ export function renderOrderSummary() {
     }
 
     // If the new value is valid, call updateQuantity() (from cart.js) to replace the product's quantity in the cart array and save it.
-    // Then call updateCart() to recalculate the total and update the cart quantity in the header.
+    // Then call renderCheckoutHeader() to recalculate the total and update the cart quantity in the header.
     updateQuantity(productId, newQuantity);
     renderCheckoutHeader();
 
-    container.querySelector('.quantity-label').innerHTML = newQuantity;
-    container.classList.remove('is-editing-quantity');
-
-    console.log("this is Saved product-Id", productId);
+    renderOrderSummary(); //re-render the order summary to reflect the updated delivery option
 
     renderPaymentSummary(); //re-render the payment summary to reflect the updated cart after an item is removed
 
@@ -190,16 +187,14 @@ export function renderOrderSummary() {
     .forEach((link) => {
       link.addEventListener('click', () => {
         saveQuantity(link.dataset.productId)
-        renderPaymentSummary(); //re-render the payment summary to reflect the updated cart after an item is removed
-      })
-    })
+      });
+    });
 
   document.querySelectorAll('.quantity-input')
     .forEach((input) => {
       input.addEventListener('keydown', (event) => {
         if (event.key === 'Enter') {
           saveQuantity(input.dataset.productId)
-          renderPaymentSummary(); //re-render the payment summary to reflect the updated cart after an item is removed
         }
       })
     })
@@ -272,5 +267,6 @@ console.log(isSatSun(dayjs('2026-11-09')), "monday");         // false
 
 
 // ------- 15k. after deleting a product from the cart, re-render the checkout Header so the cart quantity is up-to-date. Note: use MVC instead of updating the page directly with the DOM.
+// done in lines 129-143
 
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
