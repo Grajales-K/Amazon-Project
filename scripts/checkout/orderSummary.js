@@ -256,7 +256,15 @@ console.log(isSatSun(dayjs('2026-11-09')), "monday");         // false
 // ------- 15k. after deleting a product from the cart, re-render the checkout Header so the cart quantity is up-to-date. Note: use MVC instead of updating the page directly with the DOM.
 // done in lines 129-143
 
-// ------- 15i.In orderSummary.js, we have some code at the top that takes a deliveryOption, calculates the delivery date, and formats it.This code is repeated in deliveryOptionsHTML().Create a function to reuse this code. (Create a function calculateDeliveryDate(deliveryOption) in deliveryOptions.js, import and run this function in orderSummary.js).
+// ------- 15l.In orderSummary.js, we have some code at the top that takes a deliveryOption, calculates the delivery date, and formats it.This code is repeated in deliveryOptionsHTML().Create a function to reuse this code. (Create a function calculateDeliveryDate(deliveryOption) in deliveryOptions.js, import and run this function in orderSummary.js).
 // done in deliveryOptions.js and orderSummary.js lines 49-51 and 55-57
 
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
+/* ------- 15m. When calculating the delivert date, skip0 ll Saturdays and Sundays. 
+e.g. Examples: if today is Friday, Oct 5 and we choose 1-day delivery, 
+the delivery date should be Monday, Oct 8 (skip the weekend).
+*Friday, Nov 27 + 3 days = Wednesday, Dec 2 (skip the weekend).
+*Tuesday, Nov 24 + 3 days = Thursday, Nov 27 (no weekend in between).
+*Friday, Nov 27 + 7 days = Tuesday, Nov 7 (skip 2 weekends in between)
+
+
+*/
