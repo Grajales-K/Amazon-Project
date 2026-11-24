@@ -262,9 +262,18 @@ console.log(isSatSun(dayjs('2026-11-09')), "monday");         // false
 /* ------- 15m. When calculating the delivert date, skip0 ll Saturdays and Sundays. 
 e.g. Examples: if today is Friday, Oct 5 and we choose 1-day delivery, 
 the delivery date should be Monday, Oct 8 (skip the weekend).
-*Friday, Nov 27 + 3 days = Wednesday, Dec 2 (skip the weekend).
-*Tuesday, Nov 24 + 3 days = Thursday, Nov 27 (no weekend in between).
-*Friday, Nov 27 + 7 days = Tuesday, Nov 7 (skip 2 weekends in between)
+*Friday, Nov 27 + 3 days = Wednesday, Dec 3 (skip the weekend).
+*Tuesday, Nov 24 + 3 days = Friday, Nov 27 (no weekend in between).
+*Friday, Nov 27 + 7 days = Tuesday, Dec 8 (skip 2 weekends in between).
 
-
+  done in file deliveryOptions.js and using weeDay.js
 */
+
+
+/* ------- 15n. Make the "Update" quantity interactive using MVC: instead of updating the page
+directly with the DOM, update the data and re-render every part of the page that depends on it.
+done in saveQuantity() in orderSummary.js:
+  updateQuantity()        -> changes the data (cart) and saves it
+  renderCheckoutHeader()  -> header total
+  renderOrderSummary()    -> products and quantities
+  renderPaymentSummary()  -> totals */
